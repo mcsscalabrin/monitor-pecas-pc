@@ -55,4 +55,6 @@ def obter_preco(url: str) -> tuple[float, str | None]:
         ("__NEXT_DATA__", via_next_data),
         ("meta", lambda: preco_meta(soup)),
     ])
+    if "v" not in nome:  # preço veio do PIX: o nome limpo está no JSON-LD (o <title> traz " | Pichau")
+        nome["v"] = preco_jsonld(soup)[1]
     return preco, nome.get("v") or titulo(soup)

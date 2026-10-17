@@ -88,5 +88,59 @@
     "categoria": "Fonte",
     "preco_alvo": 399.99,
     "imagem": "https://images.kabum.com.br/produtos/fotos/sync_mirakl/572486/large/Fonte-de-Alimenta-o-Corsair-CX750-750W-80-Plus-Bronze-CP-9020279-BR_1779557916.jpg"
+  },
+  {
+    "id": "kb-e54395",
+    "site": "kabum",
+    "url": "https://www.kabum.com.br/produto/662405/processador-amd-ryzen-7-9800x3d-4-7ghz-5-2ghz-max-turbo-cache-104mb-8-nucleos-16-threads-am5-com-video-integrado-100-100001084wof",
+    "nome": "Processador AMD Ryzen 7 9800X3D, 4.7GHz (5.2GHz Max Turbo), Cache 104MB, 8 Núcleos, 16 Threads, AM5, Com Vídeo Integrado",
+    "categoria": "Processador",
+    "preco_alvo": null,
+    "imagem": "https://images.kabum.com.br/produtos/fotos/662405/processador-amd-ryzen-7-9800x3d-cache-8mb-8-nucleos-16-threads-am5-100-100001084wof_1731351198_g.jpg"
+  },
+  {
+    "id": "kb-f06e0e",
+    "site": "kabum",
+    "url": "https://www.kabum.com.br/produto/1055519/placa-mae-asus-rog-strix-x670e-e-gaming-wi-fi-socket-am5-ddr5",
+    "nome": "Placa Mãe Asus Rog Strix X670e-e Gaming Wi-fi Socket Am5 / Ddr5",
+    "categoria": "Placa-mãe",
+    "preco_alvo": null,
+    "imagem": "https://images.kabum.com.br/produtos/fotos/sync_mirakl/1055519/large/Placa-M-e-Asus-Rog-Strix-X670e-e-Gaming-Wi-fi-Socket-Am5-Ddr5_1783369426.jpg"
+  },
+  {
+    "id": "kb-5bfe26",
+    "site": "kabum",
+    "url": "https://www.kabum.com.br/produto/464267/ssd-samsung-990-pro-1tb-nvme-m-2-2280-mz-v9p1t0b-am-",
+    "nome": "SSD Samsung 990 Pro 1TB, Nvme M.2 2280, Mz-v9p1t0b/am.",
+    "categoria": "SSD",
+    "preco_alvo": null,
+    "imagem": "https://images.kabum.com.br/produtos/fotos/sync_mirakl/464267/large/SSD-Samsung-990-Pro-1TB-Nvme-M-2-2280-Mz-v9p1t0b-am-_1790363617.jpg"
+  },
+  {
+    "id": "kb-033e47",
+    "site": "kabum",
+    "url": "https://www.kabum.com.br/produto/1031690/fonte-corsair-rm850x-shift-850w-80-plus-gold-totalmente-modular-pfc-ativo-com-cabo-preto-cp-9020299",
+    "nome": "Fonte Corsair RM850x SHIFT, 850W, 80 Plus Gold, Totalmente Modular, PFC Ativo, Com Cabo, Preto - CP-9020299-BR",
+    "categoria": "Fonte",
+    "preco_alvo": null,
+    "imagem": "https://images.kabum.com.br/produtos/fotos/1031690/fonte-corsair-rm850x-shift-850w-80-plus-gold-totalmente-modular-pfc-ativo-com-cabo-preto-cp-9020299_1784826829_g.jpg"
+  },
+  {
+    "id": "kb-e06d93",
+    "site": "kabum",
+    "url": "https://www.kabum.com.br/produto/110023/gabinete-gamer-nzxt-h510i-mid-tower-rgb-com-fan-lateral-em-vidro-ca-h510i-b1",
+    "nome": "Gabinete Gamer NZXT H510i, Mid Tower, RGB, com FAN, Lateral em Vidro - CA-H510I-B1",
+    "categoria": "Gabinete",
+    "preco_alvo": null,
+    "imagem": "https://images.kabum.com.br/produtos/fotos/110023/gabinete-gamer-nzxt-h510i-mid-tower-rgb-com-fan-lateral-em-vidro-ca-h510i-b1_1581600617_g.jpg"
+  },
+  {
+    "id": "pc-d80ec2",
+    "site": "pichau",
+    "url": "https://www.pichau.com.br/cooler-para-processador-noctua-nh-d15-chromax-140mm-preta-nh-d15-ch-bk",
+    "nome": "Cooler Para Processador Noctua NH-D15 chromax, 140mm, Preta, NH-D15-CH.BK",
+    "categoria": "Cooler",
+    "preco_alvo": null,
+    "imagem": "https://media.pichau.com.br/media/catalog/product/cache/74c1057f7991b4edb2bc7bdaa94de933/n/h/nh-d15-ch.bk.jpg"
   }
 ]
