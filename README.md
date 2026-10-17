@@ -103,6 +103,10 @@ Só mensagens vindas do seu `TELEGRAM_CHAT_ID` são aceitas.
   `requests` e, se for bloqueado, tenta de novo com `curl_cffi` (imita o
   Chrome). Mesmo assim pode falhar — o erro aparece no log e os outros
   produtos continuam sendo checados.
+- **Pichau bloqueada no Actions**: em out/2026 a Pichau devolveu HTTP 403
+  para os IPs do GitHub mesmo com `curl_cffi`, então o workflow de 1h usa
+  `--excluir amazon,pichau`. Do PC de casa funciona: veja o preço com
+  "Testar preço" no painel ou `python -m scraper.main --apenas pichau --sem-telegram`.
 - **HTML muda**: os scrapers usam várias estratégias (JSON-LD, meta tags,
   `__NEXT_DATA__`, seletores CSS). Se uma loja mudar o layout, ajuste o
   arquivo correspondente em `scraper/sites/`.

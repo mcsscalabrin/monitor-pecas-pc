@@ -29,8 +29,10 @@ jobs:
       - name: Instalar dependências
         run: pip install -r requirements.txt
 
-      - name: Checar preços (Mercado Livre, Kabum, Terabyte, Pichau)
+      # Pichau fica de fora: a Cloudflare dela devolve 403 para os IPs do GitHub
+      # (testado em out/2026). Do PC de casa funciona; use "Testar preço" no painel.
+      - name: Checar preços (Mercado Livre, Kabum, Terabyte)
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: python -m scraper.main --excluir amazon
+        run: python -m scraper.main --excluir amazon,pichau

@@ -54,5 +54,29 @@
     "nome": "Air Cooler Para Processador Deepcool Ak400 Bk, Intel/Amd - Preto",
     "categoria": "Cooler",
     "preco_alvo": 150.61
+  },
+  {
+    "id": "kb-661c0d",
+    "site": "kabum",
+    "url": "https://www.kabum.com.br/produto/1071575/placa-de-video-rtx-5070-12gb-gddr7-192",
+    "nome": "Placa De Vídeo Zotac Gaming Nvidia Geforce RTX 5070 Twin Edge Oc, 12gb, Gddr7, Dlss, Ray Tracing, Zt-b50700h-10a",
+    "categoria": "Placa de vídeo",
+    "preco_alvo": 4999.99
+  },
+  {
+    "id": "kb-a45b81",
+    "site": "kabum",
+    "url": "https://www.kabum.com.br/produto/988585/memoria-ram-corsair-vengeance-32gb-2x16gb-6000mhz-ddr5-cl38-intel-xmp-preto-cmk32gx5m2b6000c38-",
+    "nome": "Memória RAM Corsair Vengeance, 32GB (2x16GB), 6000MHz, DDR5, CL38, Intel XMP, Preto - CMK32GX5M2B6000C38",
+    "categoria": "Memória RAM",
+    "preco_alvo": 1406.12
+  },
+  {
+    "id": "kb-225171",
+    "site": "kabum",
+    "url": "https://www.kabum.com.br/produto/572486/fonte-de-alimentacao-corsair-cx750-750w-80-plus-bronze-cp-9020279-br",
+    "nome": "Fonte de Alimentação Corsair CX750, 750W 80 Plus, Bronze - CP-9020279-BR",
+    "categoria": "Fonte",
+    "preco_alvo": 399.99
   }
 ]
