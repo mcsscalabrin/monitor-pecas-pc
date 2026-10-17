@@ -18,7 +18,7 @@ from urllib.parse import unquote, urlparse, urlunparse
 
 from scraper import git_sync, rede, storage, telegram
 from scraper.main import brl
-from scraper.sites import PREFIXOS, SITES, detectar_site, eh_encurtado
+from scraper.sites import PREFIXOS, SITES, detectar_site, eh_encurtado, obter_imagem
 from scraper.sites import amazon
 from scraper.sites._parse import parse_brl
 
@@ -94,12 +94,19 @@ def cmd_add(args: list[str], produtos: list[dict]) -> tuple[str, dict | None]:
     except Exception as e:  # best effort: o /add funciona mesmo se o scraping falhar agora
         print(f"  [add] não consegui ler o preço agora: {type(e).__name__}: {e}")
 
+    imagem = None
+    try:
+        imagem = obter_imagem(url)
+    except Exception as e:  # sem foto o alerta sai só em texto
+        print(f"  [add] não consegui ler a imagem: {type(e).__name__}: {e}")
+
     produto = {
         "id": gerar_id(url, site, {p.get("id") for p in produtos}),
         "site": site,
         "url": url,
         "nome": (nome or nome_pela_url(url)).strip()[:120],
         "preco_alvo": round(alvo, 2) if alvo is not None else None,
+        "imagem": imagem,
     }
     resposta = [
         "✅ Adicionado!",

@@ -3,7 +3,12 @@ name: Checar preços
 on:
   schedule:
     - cron: "7 * * * *" # a cada 1h (minuto 7 para fugir do pico do minuto 0)
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      testar_alerta:
+        description: "Só envia um alerta de teste para este id (ex.: kb-04a445). Vazio = checagem normal."
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -35,4 +40,10 @@ jobs:
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: python -m scraper.main --excluir amazon,pichau
+          TESTAR_ALERTA: ${{ inputs.testar_alerta }}
+        run: |
+          if [ -n "$TESTAR_ALERTA" ]; then
+            python -m scraper.main --testar-alerta "$TESTAR_ALERTA"
+          else
+            python -m scraper.main --excluir amazon,pichau
+          fi

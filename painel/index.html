@@ -38,6 +38,8 @@
   th { font-size: 12px; color: var(--suave); font-weight: 600; }
   td input, td select { padding: 5px 7px; }
   td.nome input { min-width: 240px; }
+  td.foto { width: 56px; }
+  td.foto img, td.foto span { display: block; width: 48px; height: 48px; object-fit: contain; border-radius: 6px; background: #fff; border: 1px solid var(--borda); }
   td.alvo input { width: 110px; }
   .site { font-size: 12px; color: var(--suave); }
   .preco { font-variant-numeric: tabular-nums; }
@@ -87,7 +89,7 @@
     <div class="tabela">
       <table>
         <thead><tr>
-          <th>Categoria</th><th>Nome</th><th>Último preço</th><th>Alvo (R$)</th><th></th>
+          <th></th><th>Categoria</th><th>Nome</th><th>Último preço</th><th>Alvo (R$)</th><th></th>
         </tr></thead>
         <tbody id="linhas"></tbody>
       </table>
@@ -167,7 +169,7 @@ function render() {
   const tbody = $("#linhas");
   tbody.innerHTML = "";
   if (!lista.length) {
-    tbody.append(el("tr", {}, el("td", { colSpan: 5, className: "vazio", textContent: "Nenhuma peça ainda. Adicione um link acima." })));
+    tbody.append(el("tr", {}, el("td", { colSpan: 6, className: "vazio", textContent: "Nenhuma peça ainda. Adicione um link acima." })));
     return;
   }
   for (const p of lista) {
@@ -215,7 +217,11 @@ function render() {
       }
     };
 
+    const foto = p.imagem
+      ? el("img", { src: p.imagem, alt: "", loading: "lazy", referrerPolicy: "no-referrer" })
+      : el("span", { title: "sem imagem" });
     tbody.append(el("tr", {},
+      el("td", { className: "foto" }, foto),
       el("td", {}, cat),
       el("td", { className: "nome" }, nome,
         el("span", { className: "site" }, `${p.site} · `, el("a", { href: p.url, target: "_blank", rel: "noopener", textContent: "abrir" }), ` · ${p.id}`)),

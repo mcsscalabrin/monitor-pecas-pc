@@ -11,6 +11,7 @@ import requests
 
 API_BASE = "https://api.telegram.org"
 LIMITE_MENSAGEM = 4096
+LIMITE_LEGENDA = 1024
 
 
 class TelegramErro(Exception):
@@ -94,3 +95,15 @@ def enviar_mensagem(texto: str, destino: str | None = None) -> bool:
     except TelegramErro as e:
         print(f"[telegram] falha ao enviar mensagem: {e}")
         return False
+
+
+def enviar_foto(foto_url: str, legenda: str, destino: str | None = None) -> bool:
+    """Envia a foto com a legenda em HTML; se o Telegram recusar a imagem, cai para texto."""
+    destino = destino or chat_id()
+    if len(legenda) <= LIMITE_LEGENDA:
+        try:
+            api("sendPhoto", chat_id=destino, photo=foto_url, caption=legenda, parse_mode="HTML")
+            return True
+        except TelegramErro as e:
+            print(f"[telegram] falha ao enviar foto ({e}); enviando só o texto")
+    return enviar_mensagem(legenda, destino)

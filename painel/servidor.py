@@ -20,7 +20,7 @@ from pathlib import Path
 
 from bot.processar_comandos import gerar_id, nome_pela_url, normalizar_url
 from scraper import rede, storage
-from scraper.sites import SITES, detectar_site, eh_encurtado
+from scraper.sites import SITES, detectar_site, eh_encurtado, obter_imagem
 from scraper.sites._parse import parse_brl
 
 INDEX = Path(__file__).with_name("index.html")
@@ -69,13 +69,17 @@ def adicionar(dados: dict) -> dict:
         raise ErroPainel("site não suportado (use Kabum, Terabyte, Pichau, Amazon ou Mercado Livre)")
     url = normalizar_url(url, site)
 
-    nome, preco_atual = _texto(dados.get("nome"), 120), None
+    nome, preco_atual, imagem = _texto(dados.get("nome"), 120), None, None
     if dados.get("buscar_preco", True):
         try:
             preco_atual, nome_site = SITES[site].obter_preco(url)
             nome = nome or (nome_site or "")
         except Exception as e:  # best effort, igual ao /add do bot
             print(f"[painel] não consegui ler o preço agora: {type(e).__name__}: {e}")
+        try:
+            imagem = obter_imagem(url)
+        except Exception as e:
+            print(f"[painel] não consegui ler a imagem: {type(e).__name__}: {e}")
 
     with _trava:
         produtos = storage.ler_produtos()
@@ -89,6 +93,7 @@ def adicionar(dados: dict) -> dict:
             "nome": (nome or nome_pela_url(url)).strip()[:120],
             "categoria": _texto(dados.get("categoria"), 40) or None,
             "preco_alvo": alvo,
+            "imagem": imagem,
         }
         produtos.append(produto)
         storage.gravar_json(storage.PRODUTOS, produtos)

@@ -5,7 +5,8 @@
     "url": "https://www.terabyteshop.com.br/produto/39633/kit-upgrade-amd-ryzen-5-9600x-placa-mae-chipset-b650",
     "nome": "Kit Upgrade, AMD Ryzen 5 9600X + Placa Mãe Chipset B650",
     "categoria": "Kit CPU + placa-mãe",
-    "preco_alvo": 2089.99
+    "preco_alvo": 2089.99,
+    "imagem": "https://img.terabyteshop.com.br/produto/p/kit-upgrade-amd-ryzen-5-9600x-placa-mae-chipset-b650_263764.jpg"
   },
   {
     "id": "pc-a92837",
@@ -13,7 +14,8 @@
     "url": "https://www.pichau.com.br/placa-de-video-zotac-gaming-geforce-rtx-5070-twin-edge-oc-12gb-gddr7-192-bit-zt-b50700h-10a-nac",
     "nome": "Placa de Video ZOTAC GAMING GeForce RTX 5070 Twin Edge OC, 12GB, GDDR7, 192-bit, ZT-B50700H-10A-NAC",
     "categoria": "Placa de vídeo",
-    "preco_alvo": 4999.99
+    "preco_alvo": 4999.99,
+    "imagem": "https://media.pichau.com.br/media/catalog/product/cache/74c1057f7991b4edb2bc7bdaa94de933/z/t/zt-b50700h-10a-nac4.jpg"
   },
   {
     "id": "pc-1d6947",
@@ -21,7 +23,8 @@
     "url": "https://www.pichau.com.br/memoria-corsair-vengeance-32gb-2x16gb-ddr5-6000mhz-cl36-preto-cmk32gx5m2e6000c36",
     "nome": "Memoria Corsair Vengeance, 32GB (2x16GB), DDR5, 6000MHz, CL36, Preto, CMK32GX5M2E6000C36",
     "categoria": "Memória RAM",
-    "preco_alvo": 1406.12
+    "preco_alvo": 1406.12,
+    "imagem": "https://media.pichau.com.br/media/catalog/product/cache/74c1057f7991b4edb2bc7bdaa94de933/c/m/cmk32gx5m2e6000c36.jpg"
   },
   {
     "id": "kb-a93ebe",
@@ -29,7 +32,8 @@
     "url": "https://www.kabum.com.br/produto/621162/ssd-kingston-nv3-1-tb-m-2-2280-pcie-4-0-x4-nvme-leitura-6000-mb-s-gravacao-4000-mb-s-azul-snv3s-1000g",
     "nome": "SSD Kingston NV3, 1TB, M.2 2280, PCIe 4.0 x4, NVMe, Leitura: 6000 MB/s, Gravação: 4000 MB/s, Azul - SNV3S/1000G",
     "categoria": "SSD",
-    "preco_alvo": 450.0
+    "preco_alvo": 450.0,
+    "imagem": "https://images.kabum.com.br/produtos/fotos/621162/ssd-pcie-kingston-nv3-1-tb-m-2-2280-nvme-leitura-6000-mb-s-e-gravacao-4000-mb-s-snv3s-1000g_1726082185_g.jpg"
   },
   {
     "id": "pc-635443",
@@ -37,7 +41,8 @@
     "url": "https://www.pichau.com.br/fonte-corsair-cx750-750w-80-plus-bronze-preto-cp-9020279-br",
     "nome": "Fonte Corsair CX750, 750W, 80 Plus Bronze, Preto, CP-9020279-BR",
     "categoria": "Fonte",
-    "preco_alvo": 399.99
+    "preco_alvo": 399.99,
+    "imagem": "https://media.pichau.com.br/media/catalog/product/cache/74c1057f7991b4edb2bc7bdaa94de933/c/p/cp-9020279-br.jpg"
   },
   {
     "id": "kb-d10be5",
@@ -45,7 +50,8 @@
     "url": "https://www.kabum.com.br/produto/531849/gabinete-gamer-msi-mag-forge-120a-airflow-mid-tower-lateral-em-vidro-6x-fans-rgb-atx-preto-306-7g23a21-809",
     "nome": "Gabinete Gamer MSI MAG Forge 120A Airflow, Mid Tower, Lateral em Vidro, 6x FANs RGB, ATX, Preto - 306-7G23A21-809",
     "categoria": "Gabinete",
-    "preco_alvo": 509.99
+    "preco_alvo": 509.99,
+    "imagem": "https://images.kabum.com.br/produtos/fotos/531849/gabinete-gamer-msi-mag-forge-120a-airflow-mid-tower-atx-preto-306-7g23a21-809-_1724686518_g.jpg"
   },
   {
     "id": "kb-04a445",
@@ -53,7 +59,8 @@
     "url": "https://www.kabum.com.br/produto/460434/air-cooler-para-processador-deepcool-ak400-bk-preto",
     "nome": "Air Cooler Para Processador Deepcool Ak400 Bk, Intel/Amd - Preto",
     "categoria": "Cooler",
-    "preco_alvo": 150.61
+    "preco_alvo": 150.61,
+    "imagem": "https://images.kabum.com.br/produtos/fotos/sync_mirakl/460434/large/Air-Cooler-Para-Processador-Deepcool-Ak400-Bk-Intel-Amd-Preto_1791315815.jpg"
   },
   {
     "id": "kb-661c0d",
@@ -61,7 +68,8 @@
     "url": "https://www.kabum.com.br/produto/1071575/placa-de-video-rtx-5070-12gb-gddr7-192",
     "nome": "Placa De Vídeo Zotac Gaming Nvidia Geforce RTX 5070 Twin Edge Oc, 12gb, Gddr7, Dlss, Ray Tracing, Zt-b50700h-10a",
     "categoria": "Placa de vídeo",
-    "preco_alvo": 4999.99
+    "preco_alvo": 4999.99,
+    "imagem": "https://images.kabum.com.br/produtos/fotos/sync_mirakl/1071575/large/Placa-De-V-deo-Zotac-Gaming-Nvidia-Geforce-RTX-5070-Twin-Edge-Oc-12gb-Gddr7-Dlss-Ray-Tracing-Zt-b50700h-10a_1792173817.jpg"
   },
   {
     "id": "kb-a45b81",
@@ -69,7 +77,8 @@
     "url": "https://www.kabum.com.br/produto/988585/memoria-ram-corsair-vengeance-32gb-2x16gb-6000mhz-ddr5-cl38-intel-xmp-preto-cmk32gx5m2b6000c38-",
     "nome": "Memória RAM Corsair Vengeance, 32GB (2x16GB), 6000MHz, DDR5, CL38, Intel XMP, Preto - CMK32GX5M2B6000C38",
     "categoria": "Memória RAM",
-    "preco_alvo": 1406.12
+    "preco_alvo": 1406.12,
+    "imagem": "https://images.kabum.com.br/produtos/fotos/988585/memoria-ram-corsair-vengeance-32gb-2x16gb-6000mhz-ddr5-cl38-intel-xmp-preto-cmk32gx5m2b6000c38-_1769176819_g.jpg"
   },
   {
     "id": "kb-225171",
@@ -77,6 +86,7 @@
     "url": "https://www.kabum.com.br/produto/572486/fonte-de-alimentacao-corsair-cx750-750w-80-plus-bronze-cp-9020279-br",
     "nome": "Fonte de Alimentação Corsair CX750, 750W 80 Plus, Bronze - CP-9020279-BR",
     "categoria": "Fonte",
-    "preco_alvo": 399.99
+    "preco_alvo": 399.99,
+    "imagem": "https://images.kabum.com.br/produtos/fotos/sync_mirakl/572486/large/Fonte-de-Alimenta-o-Corsair-CX750-750W-80-Plus-Bronze-CP-9020279-BR_1779557916.jpg"
   }
 ]

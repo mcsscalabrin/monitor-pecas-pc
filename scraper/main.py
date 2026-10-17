@@ -66,11 +66,33 @@ def _parse_args(argv=None):
     p.add_argument("--apenas", default="", help="sites a checar, separados por vírgula")
     p.add_argument("--excluir", default="", help="sites a ignorar, separados por vírgula")
     p.add_argument("--sem-telegram", action="store_true", help="não envia mensagens (teste local)")
+    p.add_argument("--testar-alerta", metavar="ID", default="",
+                   help="envia um alerta de exemplo desse produto (último preço salvo) e sai, sem checar nada")
     return p.parse_args(argv)
+
+
+def testar_alerta(pid: str) -> int:
+    produto = next((p for p in storage.ler_produtos() if p.get("id") == pid), None)
+    if produto is None:
+        print(f"[teste] id não encontrado: {pid}")
+        return 1
+    atual = (storage.ler_estado().get(pid) or {}).get("ultimo_preco")
+    if atual is None:
+        print(f"[teste] {pid} ainda não tem preço salvo; rode uma checagem antes")
+        return 1
+    texto = "🧪 <i>Teste de alerta</i>\n" + montar_mensagem(produto, round(atual * 1.1, 2), atual, ["caiu"])
+    if produto.get("imagem"):
+        ok = telegram.enviar_foto(produto["imagem"], texto)
+    else:
+        ok = telegram.enviar_mensagem(texto)
+    print(f"[teste] alerta de {pid} {'enviado' if ok else 'NÃO enviado'}")
+    return 0 if ok else 1
 
 
 def main(argv=None) -> int:
     args = _parse_args(argv)
+    if args.testar_alerta:
+        return testar_alerta(args.testar_alerta.strip())
     apenas = {s.strip() for s in args.apenas.split(",") if s.strip()}
     excluir = {s.strip() for s in args.excluir.split(",") if s.strip()}
 
@@ -111,6 +133,8 @@ def main(argv=None) -> int:
             texto = montar_mensagem(produto, antigo, novo, motivos)
             if args.sem_telegram:
                 print(f"[{pid}] (sem-telegram) mensagem:\n{texto}")
+            elif produto.get("imagem"):
+                telegram.enviar_foto(produto["imagem"], texto)
             else:
                 telegram.enviar_mensagem(texto)
 

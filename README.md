@@ -117,6 +117,17 @@ Só mensagens vindas do seu `TELEGRAM_CHAT_ID` são aceitas.
   podem ser adicionados, mas a checagem vai registrar erro no log até o ML
   liberar o acesso.
 
+## Foto do produto nos alertas
+
+No cadastro (painel ou `/add`) o bot guarda a URL da foto do produto
+(`imagem` em `data/produtos.json`, lida do JSON-LD ou da `og:image`). Os
+alertas saem como foto com legenda; se o Telegram não conseguir baixar a
+imagem, o alerta sai só em texto.
+
+Para ver como fica sem esperar uma queda real: **Actions → Checar preços →
+Run workflow** e preencha `testar_alerta` com o id do produto (ex.:
+`kb-04a445`). Localmente: `python -m scraper.main --testar-alerta kb-04a445`.
+
 ## Painel web (cadastrar peças pelo navegador)
 
 Além dos comandos do Telegram, dá para gerenciar a lista por um painel local:

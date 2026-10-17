@@ -91,6 +91,34 @@ def preco_jsonld(soup: BeautifulSoup) -> tuple[float | None, str | None]:
     return None, None
 
 
+def _url_imagem(valor: Any) -> str | None:
+    """JSON-LD aceita `image` como string, lista ou ImageObject."""
+    if isinstance(valor, list):
+        for v in valor:
+            if url := _url_imagem(v):
+                return url
+        return None
+    if isinstance(valor, dict):
+        return _url_imagem(valor.get("url") or valor.get("contentUrl"))
+    if isinstance(valor, str) and valor.strip():
+        return valor.strip()
+    return None
+
+
+def imagem(soup: BeautifulSoup) -> str | None:
+    """URL da foto do produto: JSON-LD de Product, depois og:image / twitter:image."""
+    for item in _iterar_jsonld(soup):
+        tipo = item.get("@type")
+        if "Product" in (tipo if isinstance(tipo, list) else [tipo]):
+            if url := _url_imagem(item.get("image")):
+                return url
+    for attrs in ({"property": "og:image"}, {"name": "twitter:image"}):
+        tag = soup.find("meta", attrs=attrs)
+        if tag and tag.get("content"):
+            return tag["content"].strip()
+    return None
+
+
 def preco_meta(soup: BeautifulSoup) -> float | None:
     seletores = [
         ('meta', {"itemprop": "price"}),

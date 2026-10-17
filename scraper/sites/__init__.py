@@ -1,9 +1,10 @@
 """Roteamento por site: nome do site -> módulo com `obter_preco(url)`."""
 
-from urllib.parse import urlparse
+from urllib.parse import urljoin, urlparse
 
+from scraper import rede
 from scraper.sites import amazon, kabum, mercadolivre, pichau, terabyte
-from scraper.sites._parse import PrecoNaoEncontrado
+from scraper.sites._parse import PrecoNaoEncontrado, imagem, sopa
 
 SITES = {
     "mercadolivre": mercadolivre,
@@ -54,4 +55,13 @@ def eh_encurtado(url: str) -> bool:
     return _host(url) in ENCURTADORES
 
 
-__all__ = ["SITES", "PREFIXOS", "PrecoNaoEncontrado", "detectar_site", "eh_encurtado"]
+def obter_imagem(url: str) -> str | None:
+    """Foto do produto (genérico para todas as lojas). Usado só no cadastro, não a cada checagem."""
+    foto = imagem(sopa(rede.get_html(url)))
+    if not foto:
+        return None
+    foto = urljoin(url, foto)
+    return foto if foto.startswith(("http://", "https://")) else None
+
+
+__all__ = ["SITES", "PREFIXOS", "PrecoNaoEncontrado", "detectar_site", "eh_encurtado", "obter_imagem"]
