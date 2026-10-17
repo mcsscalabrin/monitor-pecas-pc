@@ -1,1 +1,58 @@
-[]
+[
+  {
+    "id": "tb-94aed0",
+    "site": "terabyte",
+    "url": "https://www.terabyteshop.com.br/produto/39633/kit-upgrade-amd-ryzen-5-9600x-placa-mae-chipset-b650",
+    "nome": "Kit Upgrade, AMD Ryzen 5 9600X + Placa Mãe Chipset B650",
+    "categoria": "Kit CPU + placa-mãe",
+    "preco_alvo": 2089.99
+  },
+  {
+    "id": "pc-a92837",
+    "site": "pichau",
+    "url": "https://www.pichau.com.br/placa-de-video-zotac-gaming-geforce-rtx-5070-twin-edge-oc-12gb-gddr7-192-bit-zt-b50700h-10a-nac",
+    "nome": "Placa de Video ZOTAC GAMING GeForce RTX 5070 Twin Edge OC, 12GB, GDDR7, 192-bit, ZT-B50700H-10A-NAC",
+    "categoria": "Placa de vídeo",
+    "preco_alvo": 4999.99
+  },
+  {
+    "id": "pc-1d6947",
+    "site": "pichau",
+    "url": "https://www.pichau.com.br/memoria-corsair-vengeance-32gb-2x16gb-ddr5-6000mhz-cl36-preto-cmk32gx5m2e6000c36",
+    "nome": "Memoria Corsair Vengeance, 32GB (2x16GB), DDR5, 6000MHz, CL36, Preto, CMK32GX5M2E6000C36",
+    "categoria": "Memória RAM",
+    "preco_alvo": 1406.12
+  },
+  {
+    "id": "kb-a93ebe",
+    "site": "kabum",
+    "url": "https://www.kabum.com.br/produto/621162/ssd-kingston-nv3-1-tb-m-2-2280-pcie-4-0-x4-nvme-leitura-6000-mb-s-gravacao-4000-mb-s-azul-snv3s-1000g",
+    "nome": "SSD Kingston NV3, 1TB, M.2 2280, PCIe 4.0 x4, NVMe, Leitura: 6000 MB/s, Gravação: 4000 MB/s, Azul - SNV3S/1000G",
+    "categoria": "SSD",
+    "preco_alvo": 450.0
+  },
+  {
+    "id": "pc-635443",
+    "site": "pichau",
+    "url": "https://www.pichau.com.br/fonte-corsair-cx750-750w-80-plus-bronze-preto-cp-9020279-br",
+    "nome": "Fonte Corsair CX750, 750W, 80 Plus Bronze, Preto, CP-9020279-BR",
+    "categoria": "Fonte",
+    "preco_alvo": 399.99
+  },
+  {
+    "id": "kb-d10be5",
+    "site": "kabum",
+    "url": "https://www.kabum.com.br/produto/531849/gabinete-gamer-msi-mag-forge-120a-airflow-mid-tower-lateral-em-vidro-6x-fans-rgb-atx-preto-306-7g23a21-809",
+    "nome": "Gabinete Gamer MSI MAG Forge 120A Airflow, Mid Tower, Lateral em Vidro, 6x FANs RGB, ATX, Preto - 306-7G23A21-809",
+    "categoria": "Gabinete",
+    "preco_alvo": 509.99
+  },
+  {
+    "id": "kb-04a445",
+    "site": "kabum",
+    "url": "https://www.kabum.com.br/produto/460434/air-cooler-para-processador-deepcool-ak400-bk-preto",
+    "nome": "Air Cooler Para Processador Deepcool Ak400 Bk, Intel/Amd - Preto",
+    "categoria": "Cooler",
+    "preco_alvo": 150.61
+  }
+]
