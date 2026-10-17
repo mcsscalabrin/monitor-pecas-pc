@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Monitor de Peças</title>
+<style>
+  :root {
+    --bg: #f6f7f9; --card: #fff; --texto: #1c1f24; --suave: #667085; --borda: #e2e5ea;
+    --primaria: #2f6fed; --perigo: #d64545; --ok: #1f9d55; --alvo: #b7791f;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14161a; --card: #1d2026; --texto: #e7e9ee; --suave: #9aa3b2; --borda: #2c313a;
+      --primaria: #5b8cff; --perigo: #ef6b6b; --ok: #4cc38a; --alvo: #e0a84a;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 15px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; background: var(--bg); color: var(--texto); }
+  main { max-width: 1100px; margin: 0 auto; padding: 24px 16px 48px; }
+  header { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+  h1 { font-size: 22px; margin: 0; }
+  h2 { font-size: 16px; margin: 0 0 12px; }
+  .card { background: var(--card); border: 1px solid var(--borda); border-radius: 10px; padding: 16px; margin-bottom: 20px; }
+  form.add { display: grid; grid-template-columns: 2fr 1fr 1fr 1.4fr auto; gap: 10px; align-items: end; }
+  @media (max-width: 800px) { form.add { grid-template-columns: 1fr; } }
+  label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--suave); }
+  input, select { font: inherit; color: inherit; background: var(--bg); border: 1px solid var(--borda); border-radius: 6px; padding: 7px 9px; width: 100%; }
+  button { font: inherit; border: 1px solid var(--borda); background: var(--card); color: inherit; border-radius: 6px; padding: 7px 12px; cursor: pointer; white-space: nowrap; }
+  button.primaria { background: var(--primaria); border-color: var(--primaria); color: #fff; }
+  button.perigo { color: var(--perigo); }
+  button:disabled { opacity: .55; cursor: wait; }
+  .filtros { display: flex; gap: 10px; align-items: center; margin-bottom: 12px; flex-wrap: wrap; }
+  .filtros select { width: auto; }
+  .tabela { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; min-width: 760px; }
+  th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--borda); vertical-align: middle; }
+  th { font-size: 12px; color: var(--suave); font-weight: 600; }
+  td input, td select { padding: 5px 7px; }
+  td.nome input { min-width: 240px; }
+  td.alvo input { width: 110px; }
+  .site { font-size: 12px; color: var(--suave); }
+  .preco { font-variant-numeric: tabular-nums; }
+  .preco.abaixo { color: var(--ok); font-weight: 600; }
+  .quando { display: block; font-size: 11px; color: var(--suave); }
+  .acoes { display: flex; gap: 6px; }
+  .vazio { color: var(--suave); text-align: center; padding: 24px; }
+  #aviso { position: fixed; right: 16px; bottom: 16px; max-width: min(520px, calc(100vw - 32px)); padding: 12px 14px; border-radius: 8px; background: var(--card); border: 1px solid var(--borda); box-shadow: 0 6px 24px rgba(0,0,0,.15); white-space: pre-wrap; font-size: 13px; display: none; max-height: 50vh; overflow: auto; }
+  #aviso.erro { border-color: var(--perigo); }
+  #aviso.ok { border-color: var(--ok); }
+  .dica { font-size: 12px; color: var(--suave); margin: 10px 0 0; }
+  a { color: var(--primaria); }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Monitor de Peças</h1>
+    <button id="sync" class="primaria" title="commit + push de data/produtos.json">Enviar para o GitHub</button>
+  </header>
+
+  <section class="card">
+    <h2>Adicionar peça</h2>
+    <form class="add" id="form-add">
+      <label>Link do produto
+        <input name="url" type="url" required placeholder="https://www.kabum.com.br/produto/...">
+      </label>
+      <label>Categoria
+        <select name="categoria" id="sel-categoria"></select>
+      </label>
+      <label>Preço-alvo (opcional)
+        <input name="preco_alvo" inputmode="decimal" placeholder="1.500,00">
+      </label>
+      <label>Nome (opcional)
+        <input name="nome" placeholder="lido do site se vazio">
+      </label>
+      <button class="primaria" type="submit">Adicionar</button>
+    </form>
+    <p class="dica">Lojas: Kabum, Terabyte, Pichau, Amazon e Mercado Livre. Ao adicionar, o painel tenta ler o preço atual (pode levar alguns segundos).</p>
+  </section>
+
+  <section class="card">
+    <div class="filtros">
+      <h2 style="margin:0">Peças monitoradas <span id="contagem" class="site"></span></h2>
+      <select id="filtro"><option value="">Todas as categorias</option></select>
+    </div>
+    <div class="tabela">
+      <table>
+        <thead><tr>
+          <th>Categoria</th><th>Nome</th><th>Último preço</th><th>Alvo (R$)</th><th></th>
+        </tr></thead>
+        <tbody id="linhas"></tbody>
+      </table>
+    </div>
+    <p class="dica">Alterações são salvas em <code>data/produtos.json</code> ao sair do campo. O bot só passa a usá-las depois de "Enviar para o GitHub".</p>
+  </section>
+</main>
+<div id="aviso"></div>
+
+<script>
+const estado = { produtos: [], estado: {}, categorias: [] };
+const $ = (s) => document.querySelector(s);
+const brl = (v) => v == null ? "—" : v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+const numBR = (v) => v == null ? "" : v.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+let timerAviso;
+function avisar(texto, tipo = "ok", ms = 4000) {
+  const el = $("#aviso");
+  el.textContent = texto;
+  el.className = tipo;
+  el.style.display = "block";
+  clearTimeout(timerAviso);
+  if (ms) timerAviso = setTimeout(() => (el.style.display = "none"), ms);
+}
+$("#aviso").onclick = () => ($("#aviso").style.display = "none");
+
+async function api(metodo, caminho, corpo) {
+  const r = await fetch(caminho, {
+    method: metodo,
+    headers: corpo ? { "Content-Type": "application/json" } : {},
+    body: corpo ? JSON.stringify(corpo) : undefined,
+  });
+  const dados = await r.json();
+  if (!r.ok) throw new Error(dados.erro || r.statusText);
+  return dados;
+}
+
+function opcoesCategoria(sel, atual, vazio) {
+  sel.innerHTML = "";
+  const lista = [...estado.categorias];
+  if (atual && !lista.includes(atual)) lista.push(atual);
+  sel.append(new Option(vazio, ""));
+  for (const c of lista) sel.append(new Option(c, c, false, c === atual));
+}
+
+function el(tag, props = {}, ...filhos) {
+  const e = Object.assign(document.createElement(tag), props);
+  e.append(...filhos);
+  return e;
+}
+
+async function salvar(pid, campo, valor) {
+  try {
+    const { produto } = await api("PATCH", `/api/produtos/${pid}`, { [campo]: valor });
+    Object.assign(estado.produtos.find((p) => p.id === pid), produto);
+    avisar("Salvo");
+    render();
+  } catch (e) {
+    avisar(e.message, "erro");
+    render();
+  }
+}
+
+function render() {
+  const filtro = $("#filtro").value;
+  const usadas = [...new Set(estado.produtos.map((p) => p.categoria).filter(Boolean))].sort();
+  const selFiltro = $("#filtro");
+  selFiltro.innerHTML = "";
+  selFiltro.append(new Option("Todas as categorias", ""));
+  for (const c of usadas) selFiltro.append(new Option(c, c, false, c === filtro));
+
+  const lista = estado.produtos
+    .filter((p) => !filtro || p.categoria === filtro)
+    .sort((a, b) => (a.categoria || "~").localeCompare(b.categoria || "~") || (a.nome || "").localeCompare(b.nome || ""));
+  $("#contagem").textContent = `(${estado.produtos.length})`;
+
+  const tbody = $("#linhas");
+  tbody.innerHTML = "";
+  if (!lista.length) {
+    tbody.append(el("tr", {}, el("td", { colSpan: 5, className: "vazio", textContent: "Nenhuma peça ainda. Adicione um link acima." })));
+    return;
+  }
+  for (const p of lista) {
+    const e = estado.estado[p.id] || {};
+    const cat = el("select");
+    opcoesCategoria(cat, p.categoria, "—");
+    cat.onchange = () => salvar(p.id, "categoria", cat.value);
+
+    const nome = el("input", { value: p.nome || "" });
+    nome.onchange = () => salvar(p.id, "nome", nome.value);
+
+    const alvo = el("input", { value: numBR(p.preco_alvo), inputMode: "decimal", placeholder: "sem alvo" });
+    alvo.onchange = () => salvar(p.id, "preco_alvo", alvo.value);
+
+    const abaixo = e.ultimo_preco != null && p.preco_alvo != null && e.ultimo_preco <= p.preco_alvo;
+    const quando = e.atualizado_em ? new Date(e.atualizado_em).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" }) : "nunca checado";
+
+    const btnChecar = el("button", { textContent: "Testar preço", title: "lê o preço agora (não altera o estado do bot)" });
+    btnChecar.onclick = async () => {
+      btnChecar.disabled = true;
+      try {
+        const r = await api("POST", `/api/checar/${p.id}`);
+        avisar(`${p.nome}\nPreço agora: ${brl(r.preco)}`);
+      } catch (err) {
+        avisar(err.message, "erro", 8000);
+      } finally {
+        btnChecar.disabled = false;
+      }
+    };
+    const btnRemover = el("button", { textContent: "Remover", className: "perigo" });
+    btnRemover.onclick = async () => {
+      if (btnRemover.dataset.confirmar !== "1") {
+        btnRemover.dataset.confirmar = "1";
+        btnRemover.textContent = "Confirmar?";
+        setTimeout(() => { btnRemover.dataset.confirmar = ""; btnRemover.textContent = "Remover"; }, 3000);
+        return;
+      }
+      try {
+        await api("DELETE", `/api/produtos/${p.id}`);
+        estado.produtos = estado.produtos.filter((x) => x.id !== p.id);
+        avisar("Removido");
+        render();
+      } catch (err) {
+        avisar(err.message, "erro");
+      }
+    };
+
+    tbody.append(el("tr", {},
+      el("td", {}, cat),
+      el("td", { className: "nome" }, nome,
+        el("span", { className: "site" }, `${p.site} · `, el("a", { href: p.url, target: "_blank", rel: "noopener", textContent: "abrir" }), ` · ${p.id}`)),
+      el("td", {}, el("span", { className: "preco" + (abaixo ? " abaixo" : ""), textContent: brl(e.ultimo_preco) }),
+        el("span", { className: "quando", textContent: quando })),
+      el("td", { className: "alvo" }, alvo),
+      el("td", {}, el("div", { className: "acoes" }, btnChecar, btnRemover)),
+    ));
+  }
+}
+
+async function carregar() {
+  const dados = await api("GET", "/api/produtos");
+  Object.assign(estado, dados);
+  opcoesCategoria($("#sel-categoria"), "", "Escolha…");
+  render();
+}
+
+$("#filtro").onchange = render;
+
+$("#form-add").onsubmit = async (ev) => {
+  ev.preventDefault();
+  const form = ev.target;
+  const botao = form.querySelector("button");
+  botao.disabled = true;
+  botao.textContent = "Adicionando…";
+  try {
+    const dados = Object.fromEntries(new FormData(form));
+    const r = await api("POST", "/api/produtos", dados);
+    estado.produtos.push(r.produto);
+    form.reset();
+    avisar(`Adicionado: ${r.produto.nome}\nPreço agora: ${r.preco_atual ? brl(r.preco_atual) : "não consegui ler (o bot tenta na próxima checagem)"}`, "ok", 6000);
+    render();
+  } catch (e) {
+    avisar(e.message, "erro", 8000);
+  } finally {
+    botao.disabled = false;
+    botao.textContent = "Adicionar";
+  }
+};
+
+$("#sync").onclick = async () => {
+  const botao = $("#sync");
+  botao.disabled = true;
+  botao.textContent = "Enviando…";
+  try {
+    const r = await api("POST", "/api/sincronizar");
+    avisar("Enviado para o GitHub.\n\n" + r.log, "ok", 8000);
+    await carregar();
+  } catch (e) {
+    avisar(e.message, "erro", 0);
+  } finally {
+    botao.disabled = false;
+    botao.textContent = "Enviar para o GitHub";
+  }
+};
+
+carregar().catch((e) => avisar("Erro ao carregar: " + e.message, "erro", 0));
+</script>
+</body>
+</html>

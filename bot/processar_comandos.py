@@ -128,7 +128,8 @@ def cmd_listar(produtos: list[dict], estado: dict) -> str:
     for p in produtos:
         e = estado.get(p.get("id"), {})
         quando = (e.get("atualizado_em") or "")[:16].replace("T", " ")
-        linhas.append(f"<code>{html.escape(str(p.get('id')))}</code> · {html.escape(str(p.get('site')))}")
+        categoria = f" · {html.escape(p['categoria'])}" if p.get("categoria") else ""
+        linhas.append(f"<code>{html.escape(str(p.get('id')))}</code> · {html.escape(str(p.get('site')))}{categoria}")
         linhas.append(f"<b>{html.escape(p.get('nome') or '')}</b>")
         linhas.append(
             f"Último: {brl(e.get('ultimo_preco'))}"

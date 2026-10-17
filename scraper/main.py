@@ -39,7 +39,8 @@ def montar_mensagem(produto: dict, antigo: float | None, novo: float, motivos: l
         linhas.append("🎯 <b>Preço-alvo atingido!</b>")
     else:
         linhas.append("📉 <b>Preço caiu!</b>")
-    linhas.append(f"<b>{nome}</b> ({produto['site']})")
+    categoria = f"{html.escape(produto['categoria'])} · " if produto.get("categoria") else ""
+    linhas.append(f"<b>{nome}</b> ({categoria}{produto['site']})")
     linhas.append(f"Antes: {brl(antigo)}")
     variacao = ""
     if antigo:

@@ -113,6 +113,43 @@ Só mensagens vindas do seu `TELEGRAM_CHAT_ID` são aceitas.
   podem ser adicionados, mas a checagem vai registrar erro no log até o ML
   liberar o acesso.
 
+## Painel web (cadastrar peças pelo navegador)
+
+Além dos comandos do Telegram, dá para gerenciar a lista por um painel local:
+
+```powershell
+python -m venv .venv
+.venv\Scripts\pip install -r requirements.txt
+.venv\Scripts\python -m painel        # abre http://127.0.0.1:8765
+```
+
+No painel você:
+
+- adiciona uma peça colando o link, escolhendo a **categoria** (Processador,
+  Placa de vídeo, Memória RAM…) e, se quiser, o **preço-alvo** e um nome;
+- edita nome, categoria e alvo direto na tabela (salva ao sair do campo);
+- usa **Testar preço** para ver se o scraper consegue ler a página agora;
+- remove peças.
+
+As alterações vão para `data/produtos.json` no seu PC. Os workflows rodam no
+GitHub, então clique em **Enviar para o GitHub** (faz commit, `pull --rebase`
+e push de `data/produtos.json`) para o bot passar a usá-las. O painel só
+escuta em `127.0.0.1` e não tem login, por isso não o exponha na rede.
+
+Cada produto em `data/produtos.json` tem este formato (`categoria` é
+opcional e aparece nos alertas e no `/listar`):
+
+```json
+{
+  "id": "kb-3e0576",
+  "site": "kabum",
+  "url": "https://www.kabum.com.br/produto/101657/...",
+  "nome": "Memória RAM Corsair Vengeance LPX 16GB",
+  "categoria": "Memória RAM",
+  "preco_alvo": 899.9
+}
+```
+
 ## Rodando localmente
 
 ```bash
@@ -144,5 +181,6 @@ scraper/telegram.py     enviar_mensagem(texto) e chamadas à Bot API
 scraper/git_sync.py     commit + pull --rebase + push com retry
 scraper/storage.py      leitura/escrita dos JSON
 bot/processar_comandos.py  comandos /add, /remover, /listar, /ajuda
+painel/                 painel web local (python -m painel)
 data/                   estado persistido
 ```
